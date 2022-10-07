@@ -3,7 +3,12 @@ use std::{ error::Error, fs };
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     // ? 表示发生错误不会恐慌(panic),而是返回错误值
     let contents: String = fs::read_to_string(config.filename)?;
-    println!("With text:\n{}", contents);
+
+    for line in search(&config.query, &contents) {
+        println!("{}", line);
+    }
+
+    // println!("With text:\n{}", contents);
     Ok(())
 }
 
